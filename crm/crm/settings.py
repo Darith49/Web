@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -40,9 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts',
+    'crm.accounts',  # Important: crm.accounts, not just accounts
     'ckeditor',
+    'ckeditor_uploader',
 ]
+
 
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
@@ -101,7 +103,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'crm.urls'
+ROOT_URLCONF = 'crm.crm.urls'
 
 TEMPLATES = [
     {
