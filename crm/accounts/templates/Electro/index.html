@@ -1,0 +1,400 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Electro - Electronics Website Template</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+
+        {% include 'Electro/IncludePath/Head.html' %}
+
+    </head>
+
+    <body>
+
+        <!-- Spinner Start -->
+        {% include 'Electro/IncludePath/Spinner.html' %}
+        <!-- Spinner End -->
+
+
+        <!-- Topbar Start -->
+        {% include 'Electro/IncludePath/Topbar.html' %}
+        <!-- Topbar End -->
+
+        <!-- Navbar & Hero Start -->
+        {% include 'Electro/IncludePath/Navbar&Hero.html' %}
+        <!-- Navbar & Hero End -->
+
+        
+        <!-- Carousel Start -->
+        <div class="container-fluid carousel bg-light px-0">
+            <div class="row g-0 justify-content-end">
+                <div class="col-12 col-lg-7 col-xl-9">
+                    <div class="header-carousel owl-carousel bg-light py-5">
+                        
+                        {% for slide in slides %}
+                            <div class="row g-0 header-carousel-item align-items-center">
+                                <div class="col-xl-6 carousel-img wow fadeInLeft" data-wow-delay="0.1s">
+                                    <img src="{% static slide.image %}" class="img-fluid w-100" alt="Image">
+                                </div>
+                                <div class="col-xl-6 carousel-content p-4">
+                                    <h4 class="text-uppercase fw-bold mb-4 wow fadeInRight" data-wow-delay="0.1s" style="letter-spacing: 3px;">{{ slide.subtitle }}</h4>
+                                    <h1 class="display-3 text-capitalize mb-4 wow fadeInRight" data-wow-delay="0.3s">{{ slide.title }}</h1>
+                                    <p class="text-dark wow fadeInRight" data-wow-delay="0.5s">{{ slide.description }}</p>
+                                    <a class="btn btn-primary rounded-pill py-3 px-5 wow fadeInRight" data-wow-delay="0.7s" href="{% url 'ElectroShop' %}">Shop Now</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                            
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5 col-xl-3 wow fadeInRight" data-wow-delay="0.1s">
+                    <div class="carousel-header-banner h-100">
+                        <img src="{% static banner.image %}" class="img-fluid w-100 h-100" style="object-fit: cover;" alt="Image">
+                        <div class="carousel-banner-offer">
+                            <p class="bg-primary text-white rounded fs-5 py-2 px-4 mb-0 me-3">{{ banner.offer_text }}</p>
+                            <p class="text-primary fs-5 fw-bold mb-0">{{ banner.label }}</p>
+                        </div>
+                        <div class="carousel-banner">
+                            <div class="carousel-banner-content text-center p-4">
+                                <a href="#" class="d-block mb-2">SmartPhone</a>
+                                <a href="#" class="d-block text-white fs-3">{{ banner.product_name }}</a>
+                                <del class="me-2 text-white fs-5">${{ banner.old_price }}</del>
+                                <span class="text-primary fs-5">${{ banner.new_price }}</span>
+                            </div>
+                            <a href="#" class="btn btn-primary rounded-pill py-2 px-4"><i class="fas fa-shopping-cart me-2"></i> Add To Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Carousel End -->
+
+        <!-- Searvices Start -->
+        {% include 'Electro/IncludePath/Searvices.html' %}
+        <!-- Searvices End -->
+
+        <!-- Products Offer Start -->
+        {% include 'Electro/IncludePath/ProductsOffer.html' %}
+        <!-- Products Offer End -->
+
+
+        <!-- Our Products Start -->
+        <div class="container-fluid product py-5">
+            <div class="container py-5">
+                <div class="tab-class">
+                    <div class="row g-4">
+
+                        <!-- Title -->
+                        <div class="col-lg-4 text-start wow fadeInLeft" data-wow-delay="0.1s">
+                            <h1>Our Products</h1>
+                        </div>
+
+                        <!-- Category Tabs -->
+                        <div class="col-lg-8 text-end  wow fadeInRight" data-wow-delay="0.1s">
+                            <ul class="nav nav-pills d-inline-flex text-center mb-5">
+
+                                <!-- All Products Tab -->
+                                <li class="nav-item mb-4">
+                                    <a class="d-flex mx-2 py-2 bg-light rounded-pill active" 
+                                    data-bs-toggle="pill" href="#tab-all">
+                                        <span class="text-dark" style="width: 130px;">All Products</span>
+                                    </a>
+                                </li>
+
+                                <!-- Dynamic Categories -->
+                                {% for category in categories %}
+                                <li class="nav-item mb-4">
+                                    <a class="d-flex mx-2 py-2 bg-light rounded-pill"
+                                    data-bs-toggle="pill" 
+                                    href="#tab-{{ category.id }}">
+                                        <span class="text-dark" style="width: 130px;">
+                                            {{ category.CategoryName }}
+                                        </span>
+                                    </a>
+                                </li>
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Tab Content -->
+                    <div class="tab-content">
+
+                        <!-- All Products Tab Content -->
+                        <div id="tab-all" class="tab-pane fade show p-0 active">
+                            <div class="row g-4">
+                                {% for product in products %}
+                                    <div class="col-md-6 col-lg-4 col-xl-3">
+                                        <div class="product-item rounded wow fadeInUp" data-wow-delay="0.1s">
+                                            <div class="product-item-inner border rounded">
+                                                <div class="product-item-inner-item">
+                                                    <img src="{% static product.image %}" class="img-fluid w-100 rounded-top" alt="">
+                                                    <!-- <div class="product-new">New</div> -->
+                                                    <div class="product-details">
+                                                        <a href="{% url 'ElectroShopDetail' product.id %}"><i class="fa fa-eye fa-1x"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="text-center rounded-bottom p-4">
+                                                    <a href="#" class="d-block mb-2">{{ product.productName }}</a>
+                                                    <a href="{% url 'ElectroShopDetail' product.id %}" class="d-block h4">{{ product.description }}</a>
+                                                    {% if product.old_price %}
+                                                        <del class="me-2 fs-5">${{ product.old_price }}</del>
+                                                    {% endif %}
+                                                    <span class="text-primary fs-5">${{ product.new_price }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="product-item-add border border-top-0 rounded-bottom text-center p-4 pt-0">
+                                                <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary border-secondary rounded-pill py-2 px-4 mb-4">
+                                                    <i class="fas fa-shopping-cart me-2"></i> Add To Cart
+                                                </a>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="d-flex">
+                                                        <!-- Filled stars -->
+                                                        {% for i in "12345"|slice:":"|make_list %}
+                                                            {% if forloop.counter <= product.rating %}
+                                                                <i class="fas fa-star text-primary"></i>
+                                                            {% else %}
+                                                                <i class="fas fa-star text-muted"></i>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <a href="#" class="text-primary d-flex align-items-center justify-content-center me-3"><span class="rounded-circle btn-sm-square border"><i class="fas fa-random"></i></i></a>
+                                                        <a href="#" class="text-primary d-flex align-items-center justify-content-center me-0"><span class="rounded-circle btn-sm-square border"><i class="fas fa-heart"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Category Filtered Tabs -->
+                        {% for category in categories %}
+                        <div id="tab-{{ category.id }}" class="tab-pane fade show p-0">
+                            <div class="row g-4">
+                                
+                                {% for product in products %}
+                                    {% if product.categoryID.id == category.id %}
+                                        <div class="col-md-6 col-lg-4 col-xl-3">
+                                            <div class="product-item rounded">
+                                                <div class="product-item-inner border rounded">
+                                                    <div class="product-item-inner-item">
+                                                        <img src="{% static product.image %}" class="img-fluid w-100 rounded-top" alt="">
+                                                        <div class="product-details">
+                                                            <a href="{% url 'ElectroShopDetail' product.id %}"><i class="fa fa-eye fa-1x"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-center rounded-bottom p-4">
+                                                        <a href="#" class="d-block mb-2">{{ product.productName }}</a>
+                                                        <a href="{% url 'ElectroShopDetail' product.id %}" class="d-block h4">{{ product.description }}</a>
+
+                                                        {% if product.old_price %}
+                                                            <del class="me-2 fs-5">${{ product.old_price }}</del>
+                                                        {% endif %}
+                                                        <span class="text-primary fs-5">${{ product.new_price }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="product-item-add border border-top-0 rounded-bottom text-center p-4 pt-0">
+                                                    <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary border-secondary rounded-pill py-2 px-4 mb-4">
+                                                        <i class="fas fa-shopping-cart me-2"></i> Add To Cart
+                                                    </a>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="d-flex">
+
+                                                    <!-- Filled stars -->
+                                                    {% for i in "12345"|slice:":"|make_list %}
+                                                        {% if forloop.counter <= product.rating %}
+                                                            <i class="fas fa-star text-primary"></i>
+                                                        {% else %}
+                                                            <i class="fas fa-star text-muted"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <a href="#" class="text-primary d-flex align-items-center justify-content-center me-3"><span class="rounded-circle btn-sm-square border"><i class="fas fa-random"></i></i></a>
+                                                        <a href="#" class="text-primary d-flex align-items-center justify-content-center me-0"><span class="rounded-circle btn-sm-square border"><i class="fas fa-heart"></i></a>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    {% endif %}
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Our Products End -->
+
+
+
+        <!-- Product Banner Start -->
+        {% include 'Electro/IncludePath/ProductBanner.html' %}
+        <!-- Product Banner End -->
+
+
+
+        
+        <!-- Product List Start -->
+        <div class="container-fluid products productList overflow-hidden">
+            <div class="container products-mini py-5">
+                <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+                    <h4 class="text-primary border-bottom border-primary border-2 d-inline-block p-2 title-border-radius wow fadeInUp" data-wow-delay="0.1s">Products</h4>
+                    <h1 class="mb-0 display-3 wow fadeInUp" data-wow-delay="0.3s">All Product Items</h1>
+                </div>
+
+                <!-- OUTER CAROUSEL -->
+                <div class="productList-carousel owl-carousel pt-4 wow fadeInUp" data-wow-delay="0.3s">
+
+                    {% for category in categories %}
+                    <!-- ONE SLIDE PER CATEGORY -->
+                    <div class="productImg-carousel owl-carousel productList-item">
+
+                        {% for p in category.product_set.all %}
+                        <div class="productImg-item products-mini-item border">
+                            <div class="row g-0">
+                                <div class="col-5">
+                                    <div class="products-mini-img border-end h-100">
+                                        <img src="{% static p.image %}" class="img-fluid w-100 h-100" alt="{{ p.productName }}">
+                                        <div class="products-mini-icon rounded-circle bg-primary">
+                                            <a href="{% url 'ElectroShopDetail' p.id %}"><i class="fa fa-eye fa-1x text-white"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <div class="products-mini-content p-3">
+                                        <a href="#" class="d-block mb-2">{{ p.productName }}</a>
+                                        <a href="{% url 'ElectroShopDetail' p.id %}" class="d-block h4">{{ p.description }}</a>
+
+                                        {% if p.old_price %}
+                                            <del class="me-2 fs-5">${{ p.old_price }}</del>
+                                        {% endif %}
+
+                                        <span class="text-primary fs-5">${{ p.new_price }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="products-mini-add border p-3">
+                                <a href="{% url 'add_to_cart' p.id %}" class="btn btn-primary border-secondary rounded-pill py-2 px-4">
+                                    <i class="fas fa-shopping-cart me-2"></i> Add To Cart
+                                </a>
+                                <div class="d-flex">
+                                    <a href="#" class="text-primary d-flex align-items-center justify-content-center me-3">
+                                        <span class="rounded-circle btn-sm-square border">
+                                            <i class="fas fa-random"></i>
+                                        </span>
+                                    </a>
+                                    <a href="#" class="text-primary d-flex align-items-center justify-content-center me-0">
+                                        <span class="rounded-circle btn-sm-square border">
+                                            <i class="fas fa-heart"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+        <!-- Product List End -->
+
+
+        
+         <!-- Bestseller Products Start -->
+        <div class="container-fluid products pb-5">
+            <div class="container products-mini py-5">
+                <div class="mx-auto text-center mb-5" style="max-width: 700px;">
+                    <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius wow fadeInUp" data-wow-delay="0.1s">Bestseller Products</h4>
+                    <p class="mb-0 wow fadeInUp" data-wow-delay="0.2s">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, asperiores ducimus sint quos tempore officia similique quia? Libero, pariatur consectetur?</p>
+                </div>
+                <div class="row g-4">
+
+                    {% for category in categories %}
+                        {% if category.CategoryName == 'Top Selling' %}
+                            {% for product in products %}
+                                {% if product.categoryID == category %}
+                                    <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.1s">
+                                        <div class="products-mini-item border">
+                                            <div class="row g-0">
+                                                <div class="col-5">
+                                                    <div class="products-mini-img border-end h-100">
+                                                        <img src="{% static product.image %}" class="img-fluid w-100 h-100" alt="Image">
+                                                        <div class="products-mini-icon rounded-circle bg-primary">
+                                                            <a href="{% url 'ElectroShopDetail' product.id %}"><i class="fa fa-eye fa-1x text-white"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-7">
+                                                    <div class="products-mini-content p-3">
+                                                        <a href="#" class="d-block mb-2">{{product.productName}}</a>
+                                                        <a href="{% url 'ElectroShopDetail' product.id %}" class="d-block h4">{{product.description}}</a>
+                                                        {% if product.old_price %}
+                                                            <del class="me-2 fs-5">${{product.old_price}}</del>
+                                                        {% endif %}
+                                                        <span class="text-primary fs-5">${{product.new_price}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="products-mini-add border p-3">
+                                                <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary border-secondary rounded-pill py-2 px-4"><i class="fas fa-shopping-cart me-2"></i> Add To Cart</a>
+                                                <div class="d-flex">
+                                                    <a href="#" class="text-primary d-flex align-items-center justify-content-center me-3"><span class="rounded-circle btn-sm-square border"><i class="fas fa-random"></i></i></a>
+                                                    <a href="#" class="text-primary d-flex align-items-center justify-content-center me-0"><span class="rounded-circle btn-sm-square border"><i class="fas fa-heart"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                        
+                </div>
+            </div>
+        </div>
+        <!-- Bestseller Products End -->
+
+
+        <!-- Footer Start -->
+        {% include 'Electro/IncludePath/Footer.html' %}
+        <!-- Footer End -->
+
+        
+        <!-- Copyright Start -->
+        {% include 'Electro/IncludePath/Copyright.html' %}
+        <!-- Copyright End -->
+
+
+        <!-- Back to Top -->
+        {% include 'Electro/IncludePath/BackToTop.html' %}
+
+        
+        <!-- JavaScript Libraries -->
+        {% include 'Electro/IncludePath/JavaScript-Libraries.html' %}
+    
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js' %}"></script>
+    </body>
+
+</html>

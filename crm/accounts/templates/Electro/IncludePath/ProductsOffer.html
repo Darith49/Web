@@ -1,0 +1,23 @@
+{% load static %}
+
+
+        <div class="container-fluid bg-light py-5">
+            <div class="container">
+                <div class="row g-4">
+                    
+                    {% for box in promoBox %}
+                        <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
+                            <a href="#" class="d-flex align-items-center justify-content-between border bg-white rounded p-4">
+                                <div>
+                                    <p class="text-muted mb-3">{{ box.description }}</p>
+                                    <h3 class="text-primary">{{ box.title }}</h3>
+                                    <h1 class="display-3 text-secondary mb-0">{{ box.discount_text }} <span class="text-primary fw-normal">Off</span></h1>
+                                </div>
+                                <img src="{% static box.image %}" class="img-fluid" alt="" width="190px">
+                            </a>
+                        </div>
+                    {% endfor %}
+                        
+                </div>
+            </div>
+        </div>

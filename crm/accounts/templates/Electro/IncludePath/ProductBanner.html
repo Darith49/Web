@@ -1,0 +1,32 @@
+{% load static %}
+
+        <div class="container-fluid py-5">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
+                        <a href="#">
+                            <div class="bg-primary rounded position-relative">
+                                <img src="{% static left_banner.image %}" class="img-fluid w-100 rounded" alt="">
+                                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center rounded p-4" style="background: rgba(255, 255, 255, 0.5);">
+                                    <h3 class="display-5 text-primary">{{ left_banner.title }} <br> <span>{{ left_banner.subtitle }}</span></h3>
+                                    <p class="fs-4 text-muted">${{ left_banner.price }}</p>
+                                    <a href="#" class="btn btn-primary rounded-pill align-self-start py-2 px-4">Shop Now</a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
+                        <a href="#">
+                            <div class="text-center bg-primary rounded position-relative">
+                                <img src="{% static right_banner.image %}" class="img-fluid w-100" alt="">
+                                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center rounded p-4" style="background: rgba(242, 139, 0, 0.5);">
+                                    <h2 class="display-2 text-secondary">{{ right_banner.title }}</h2>
+                                    <h4 class="display-5 text-white mb-4">{{ right_banner.subtitle }}</h4>
+                                    <a href="#" class="btn btn-secondary rounded-pill align-self-center py-2 px-4">Shop Now</a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>

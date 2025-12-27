@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Electro - Electronics Website Template</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+
+        <link rel="stylesheet" href="{% static 'Ogani/css/elegant-icons.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% static 'Ogani/css/nice-select.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% static 'Ogani/css/style.css' %}" type="text/css">
+        
+        {% include 'Electro/IncludePath/Head.html' %}
+
+    </head>
+
+    <body>
+
+        <!-- Spinner Start -->
+        {% include 'Electro/IncludePath/Spinner.html' %}
+        <!-- Spinner End -->
+
+
+        <!-- Topbar Start -->
+        {% include 'Electro/IncludePath/Topbar.html' %}
+        <!-- Topbar End -->
+
+        <!-- Navbar & Hero Start -->
+        {% include 'Electro/IncludePath/Navbar&Hero.html' %}
+        <!-- Navbar & Hero End -->
+
+        <!-- Single Page Header start -->
+        <div class="container-fluid page-header py-5">
+            <h1 class="text-center text-white display-6 wow fadeInUp" data-wow-delay="0.1s">Shop Cart</h1>
+            <ol class="breadcrumb justify-content-center mb-0 wow fadeInUp" data-wow-delay="0.3s">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                <li class="breadcrumb-item active text-white">Shop Cart</li>
+            </ol>
+        </div>
+        <!-- Single Page Header End -->
+
+
+        <!-- Cart Page Start -->
+        <section class="shoping-cart spad">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="shoping__cart__table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="shoping__product">Products</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                        <th></th>
+                                        <th>Handle</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for id, item in cart.items %}
+                                        <tr>
+                                            <td class="shoping__cart__item">
+                                                <img src="{% static item.image %}" width="80"> <h5>{{ item.productName }}</h5>
+                                            </td>
+                                            <td class="shoping__cart__price">
+                                                ${{ item.price }}
+                                            </td>
+                                            <td class="shoping__cart__quantity">
+                                                {{ item.quantity }}
+                                            </td>
+                                            <td class="shoping__cart__total">
+                                                {{ item.total }}
+                                            </td>
+                                            <td>{{ item.quantity|floatformat:2|add:item.price|floatformat:2 }}</td>
+                                            <td>
+                                                <a href="{% url 'remove_from_cart' id %}">
+                                                    <button class="btn btn-md rounded-circle bg-light border" >
+                                                        <i class="fa fa-times text-danger"></i>
+                                                    </button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="mt-5">
+                    <input type="text" class="border-0 border-bottom rounded me-5 py-3 mb-4" placeholder="Coupon Code">
+                    <button class="btn btn-primary rounded-pill px-4 py-3" type="button">Apply Coupon</button>
+                </div>
+                <div class="row g-4 justify-content-end">
+                    <div class="col-8"></div>
+                    <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
+                        <div class="bg-light rounded">
+                            <div class="p-4">
+                                <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
+                                <div class="d-flex justify-content-between mb-4">
+                                    <h5 class="mb-0 me-4">Subtotal:</h5>
+                                    <p class="mb-0">${{ total_price }}</p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <h5 class="mb-0 me-4">Shipping</h5>
+                                    <div>
+                                        <p class="mb-0">Flat rate: $3.00</p>
+                                    </div>
+                                </div>
+                                <p class="mb-0 text-end">Shipping to Ukraine.</p>
+                            </div>
+                            <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
+                                <h5 class="mb-0 ps-4 me-4">Total</h5>
+                                <p class="mb-0 pe-4">${{ total_price }}</p>
+                            </div>
+                            <a href="{% url 'checkout_view' %}">
+                                <button class="btn btn-primary rounded-pill px-4 py-3 text-uppercase mb-4 ms-4" type="button">Proceed Checkout</button>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="shoping__cart__btns">
+                            <a href="{% url 'ElectroShop' %}" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                            <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
+                                Upadate Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <!-- Cart Page End -->
+
+
+        <!-- Footer Start -->
+        {% include 'Electro/IncludePath/Footer.html' %}
+        <!-- Footer End -->
+
+        
+        <!-- Copyright Start -->
+        {% include 'Electro/IncludePath/Copyright.html' %}
+        <!-- Copyright End -->
+
+
+        <!-- Back to Top -->
+        {% include 'Electro/IncludePath/BackToTop.html' %}
+
+        
+    <!-- JavaScript Libraries -->
+    {% include 'Electro/IncludePath/JavaScript-Libraries.html' %}
+    
+
+
+    <!-- <script src="{% static 'Ogani/js/jquery-3.3.1.min.js' %}"></script> -->
+    <script src="{% static 'Ogani/js/bootstrap.min.js' %}"></script>
+    <!-- <script src="{% static 'Ogani/js/jquery.nice-select.min.js' %}"></script> -->
+    <script src="{% static 'Ogani/js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'Ogani/js/jquery.slicknav.js' %}"></script>
+    <!-- <script src="{% static 'Ogani/js/mixitup.min.js' %}"></script> -->
+    <!-- <script src="{% static 'Ogani/js/owl.carousel.min.js' %}"></script> -->
+    <script src="{% static 'Ogani/js/main.js' %}"></script>
+
+
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js' %}"></script>
+    </body>
+
+</html>
